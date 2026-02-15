@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:18
+    container_name: kofrinho-database
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: kofrinho
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - kofrinho-data:/var/lib/pos
+
+volumes:
+  kofrinho-data:

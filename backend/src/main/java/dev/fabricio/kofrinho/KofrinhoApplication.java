@@ -1,4 +1,4 @@
-package dev.fabricio.porkinho;
+package dev.fabricio.kofrinho;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class KofrinhoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PorkinhoApplication.class, args);
+		SpringApplication.run(KofrinhoApplication.class, args);
 	}
 
 }
