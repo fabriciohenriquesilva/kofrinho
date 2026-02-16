@@ -1,9 +1,9 @@
 package dev.fabricio.kofrinho.model;
 
+import dev.fabricio.kofrinho.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 
 import java.time.LocalDateTime;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "banco")
 @Getter
 @Setter
-public class Banco {
+public class Banco extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
