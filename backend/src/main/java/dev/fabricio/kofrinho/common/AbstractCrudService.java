@@ -15,6 +15,7 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID> implements B
 
     public T save(T entity) {
         try {
+            entity.setDataCriacao(LocalDateTime.now());
             beforeSave(entity);
             entity = (T) getRepository().save(entity);
             afterSave(entity);
@@ -63,7 +64,7 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID> implements B
     }
 
     public void beforeSave(T entity) {
-        entity.setDataCriacao(LocalDateTime.now());
+
     }
 
     public void afterSave(T entity) {

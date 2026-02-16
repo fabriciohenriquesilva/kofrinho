@@ -1,8 +1,6 @@
 package dev.fabricio.kofrinho.controller;
 
 import dev.fabricio.kofrinho.common.AbstractController;
-import dev.fabricio.kofrinho.common.BaseCrudService;
-import dev.fabricio.kofrinho.common.BaseMapper;
 import dev.fabricio.kofrinho.controller.dto.banco.BancoCreateRequestDTO;
 import dev.fabricio.kofrinho.controller.dto.banco.BancoResponseDTO;
 import dev.fabricio.kofrinho.controller.dto.banco.BancoUpdateRequestDTO;
@@ -25,12 +23,12 @@ public class BancoController extends AbstractController<Banco, Integer, BancoCre
     }
 
     @Override
-    protected BaseCrudService<Banco, Integer> getService() {
+    protected BancoService getService() {
         return this.bancoService;
     }
 
     @Override
-    protected BaseMapper<Banco, BancoCreateRequestDTO, BancoUpdateRequestDTO, BancoResponseDTO> getMapper() {
+    protected BancoMapper getMapper() {
         return this.bancoMapper;
     }
 }

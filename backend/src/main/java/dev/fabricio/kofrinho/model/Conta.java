@@ -1,5 +1,6 @@
 package dev.fabricio.kofrinho.model;
 
+import dev.fabricio.kofrinho.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "conta")
 @Getter
 @Setter
-public class Conta {
+public class Conta extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,10 @@ public class Conta {
 
     @Column(length = 10)
     private String codigo;
+
+    @ManyToOne
+    @JoinColumn(name = "banco")
+    private Banco banco;
 
     @ManyToOne
     @JoinColumn(name = "usuario")

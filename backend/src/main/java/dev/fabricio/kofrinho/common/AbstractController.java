@@ -16,7 +16,7 @@ public abstract class AbstractController<T extends BaseEntity, ID, C, U, R> {
 
     protected abstract BaseCrudService<T, ID> getService();
 
-    protected abstract BaseMapper<T, C, U, R> getMapper();
+    protected abstract BaseMapper<T, ID, C, U, R> getMapper();
 
     @PostMapping
     public ResponseEntity<R> create(@Valid @RequestBody C request) {
