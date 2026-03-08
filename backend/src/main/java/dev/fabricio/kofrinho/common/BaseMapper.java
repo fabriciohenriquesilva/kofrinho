@@ -3,7 +3,7 @@ package dev.fabricio.kofrinho.common;
 import dev.fabricio.kofrinho.exception.ServiceException;
 import org.springframework.beans.BeanUtils;
 
-public abstract class BaseMapper<E, ID, C, U, R> {
+public abstract class BaseMapper<E, C, U, R> {
 
     private final Class<E> entityClass;
     private final Class<R> responseClass;
@@ -12,8 +12,6 @@ public abstract class BaseMapper<E, ID, C, U, R> {
         this.entityClass = entityClass;
         this.responseClass = responseClass;
     }
-
-    protected abstract BaseCrudService<E, ID> getService();
 
     public E toEntityFromCreateRequest(C dto) {
         if (dto == null) {
@@ -51,14 +49,21 @@ public abstract class BaseMapper<E, ID, C, U, R> {
         try {
             R dto = responseClass.getDeclaredConstructor().newInstance();
             BeanUtils.copyProperties(entity, dto);
+            mapRelations(entity, dto);
             return dto;
         } catch (ReflectiveOperationException e) {
             throw new ServiceException("Erro ao mapear a Entidade para DTO: " + e.getMessage());
         }
     }
 
-    public E fromId(ID id) {
-        return getService().findById(id);
+    /**
+     * Sobreescreva este méthodo para invocar os mappers dos campos do tipo objeto
+     * da classe em questão que será serializada
+     * @param entity Entidade do modelo de dados
+     * @param response DTO de resposta para quem consumir a API
+     */
+    public void mapRelations(E entity, R response) {
+
     }
 
 }

@@ -12,15 +12,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-public abstract class AbstractController<T extends BaseEntity, ID, C, U, R> {
+public abstract class AbstractController<T extends BaseEntity, ID, C, U extends Updatable, R> {
 
-    protected abstract BaseCrudService<T, ID> getService();
+    protected abstract BaseCrudService<T, ID, C, U> getService();
 
-    protected abstract BaseMapper<T, ID, C, U, R> getMapper();
+    protected abstract BaseMapper<T, C, U, R> getMapper();
 
     @PostMapping
     public ResponseEntity<R> create(@Valid @RequestBody C request) {
-        T entity = getService().save(getMapper().toEntityFromCreateRequest(request));
+        T entity = getService().save(request);
         R response = getMapper().toDTO(entity);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -40,7 +40,7 @@ public abstract class AbstractController<T extends BaseEntity, ID, C, U, R> {
 
     @PutMapping
     public ResponseEntity<R> update(@Valid @RequestBody U request) {
-        T entity = getService().update(getMapper().toEntityFromUpdateRequest(request));
+        T entity = getService().update(request);
         R response = getMapper().toDTO(entity);
         return ResponseEntity.ok(response);
     }

@@ -9,12 +9,15 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @SuppressWarnings("unchecked")
-public abstract class AbstractCrudService<T extends BaseEntity, ID> implements BaseCrudService<T, ID> {
+public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends Updatable> implements BaseCrudService<T, ID, C, U> {
 
     public abstract JpaRepository getRepository();
+    public abstract BaseMapper getMapper();
 
-    public T save(T entity) {
+    public T save(C createRequest) {
         try {
+            T entity = (T) getMapper().toEntityFromCreateRequest(createRequest);
+
             entity.setDataCriacao(LocalDateTime.now());
             beforeSave(entity);
             entity = (T) getRepository().save(entity);
@@ -35,17 +38,18 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID> implements B
         return findById.get();
     }
 
-    public T update(T source) {
+    public T update(U updateRequest) {
         try {
-            beforeUpdate(source);
+            Optional<T> findById = getRepository().findById(updateRequest.getId());
 
-            Optional<T> findById = getRepository().findById(source.getId());
             if (findById.isEmpty()) {
-                throw new RegistroNaoEncontradoException(source.getId());
+                throw new RegistroNaoEncontradoException(updateRequest.getId());
             }
-            T foundEntity = findById.get();
 
-            BeanUtils.copyProperties(source, foundEntity, "id", "dataCriacao", "version");
+            T foundEntity = findById.get();
+            beforeUpdate(foundEntity);
+
+            BeanUtils.copyProperties(updateRequest, foundEntity, "id", "dataCriacao", "version");
             foundEntity = (T) getRepository().save(foundEntity);
 
             afterUpdate(foundEntity);

@@ -1,12 +1,12 @@
 package dev.fabricio.kofrinho.common;
 
-public interface BaseCrudService<T, ID> {
+public interface BaseCrudService<T, ID, C, U extends Updatable> {
 
-    T save(T entity);
+    T save(C createRequest);
 
     T findById(ID id);
 
-    T update(T source);
+    T update(U updateRequest);
 
     void delete(ID id);
 
