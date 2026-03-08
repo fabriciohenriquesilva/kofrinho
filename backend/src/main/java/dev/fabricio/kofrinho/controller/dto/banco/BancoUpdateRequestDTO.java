@@ -1,13 +1,21 @@
 package dev.fabricio.kofrinho.controller.dto.banco;
 
+import dev.fabricio.kofrinho.common.Updatable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-public record BancoUpdateRequestDTO(
+@Getter
+@Setter
+public class BancoUpdateRequestDTO implements Updatable {
+
         @NotNull
-        Integer id,
+        private Integer id;
+
         @NotBlank
-        String nome,
+        private String nome;
+
         @NotBlank
-        String codigo) {
+        private String codigo;
 }
