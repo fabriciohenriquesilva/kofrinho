@@ -3,12 +3,11 @@ package dev.fabricio.kofrinho.controller.mapper;
 import dev.fabricio.kofrinho.common.BaseMapper;
 import dev.fabricio.kofrinho.controller.dto.conta.ContaCreateRequestDTO;
 import dev.fabricio.kofrinho.controller.dto.conta.ContaResponseDTO;
-import dev.fabricio.kofrinho.controller.dto.conta.ContaUpdateRequestDTO;
 import dev.fabricio.kofrinho.model.Conta;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ContaMapper extends BaseMapper<Conta, ContaCreateRequestDTO, ContaUpdateRequestDTO, ContaResponseDTO> {
+public class ContaMapper extends BaseMapper<Conta, ContaCreateRequestDTO, ContaResponseDTO> {
 
     private final BancoMapper bancoMapper;
 
@@ -18,7 +17,7 @@ public class ContaMapper extends BaseMapper<Conta, ContaCreateRequestDTO, ContaU
     }
 
     @Override
-    public void mapRelations(Conta entity, ContaResponseDTO response) {
+    public void mapRelationship(Conta entity, ContaResponseDTO response) {
         response.setBanco(bancoMapper.toDTO(entity.getBanco()));
     }
 }

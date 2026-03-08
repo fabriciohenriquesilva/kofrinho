@@ -3,7 +3,7 @@ package dev.fabricio.kofrinho.common;
 import dev.fabricio.kofrinho.exception.ServiceException;
 import org.springframework.beans.BeanUtils;
 
-public abstract class BaseMapper<E, C, U, R> {
+public abstract class BaseMapper<E, C, R> {
 
     private final Class<E> entityClass;
     private final Class<R> responseClass;
@@ -13,21 +13,7 @@ public abstract class BaseMapper<E, C, U, R> {
         this.responseClass = responseClass;
     }
 
-    public E toEntityFromCreateRequest(C dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        try {
-            E entity = entityClass.getDeclaredConstructor().newInstance();
-            BeanUtils.copyProperties(dto, entity);
-            return entity;
-        } catch (ReflectiveOperationException e) {
-            throw new ServiceException("Erro ao mapear o DTO para Entidade: " + e.getMessage());
-        }
-    }
-
-    public E toEntityFromUpdateRequest(U dto) {
+    public E toEntity(C dto) {
         if (dto == null) {
             return null;
         }
@@ -49,7 +35,7 @@ public abstract class BaseMapper<E, C, U, R> {
         try {
             R dto = responseClass.getDeclaredConstructor().newInstance();
             BeanUtils.copyProperties(entity, dto);
-            mapRelations(entity, dto);
+            mapRelationship(entity, dto);
             return dto;
         } catch (ReflectiveOperationException e) {
             throw new ServiceException("Erro ao mapear a Entidade para DTO: " + e.getMessage());
@@ -62,7 +48,7 @@ public abstract class BaseMapper<E, C, U, R> {
      * @param entity Entidade do modelo de dados
      * @param response DTO de resposta para quem consumir a API
      */
-    public void mapRelations(E entity, R response) {
+    public void mapRelationship(E entity, R response) {
 
     }
 

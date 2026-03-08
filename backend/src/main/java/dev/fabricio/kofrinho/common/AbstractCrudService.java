@@ -3,6 +3,7 @@ package dev.fabricio.kofrinho.common;
 import dev.fabricio.kofrinho.exception.RegistroNaoEncontradoException;
 import dev.fabricio.kofrinho.exception.ServiceException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -12,13 +13,19 @@ import java.util.Optional;
 public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends Updatable> implements BaseCrudService<T, ID, C, U> {
 
     public abstract JpaRepository getRepository();
+
     public abstract BaseMapper getMapper();
+
+    private RelationshipResolver relationshipResolver;
 
     public T save(C createRequest) {
         try {
-            T entity = (T) getMapper().toEntityFromCreateRequest(createRequest);
+            T entity = (T) getMapper().toEntity(createRequest);
 
             entity.setDataCriacao(LocalDateTime.now());
+
+            relationshipResolver.execute(entity, createRequest);
+
             beforeSave(entity);
             entity = (T) getRepository().save(entity);
             afterSave(entity);
@@ -47,6 +54,9 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
             }
 
             T foundEntity = findById.get();
+
+            relationshipResolver.execute(foundEntity, updateRequest);
+
             beforeUpdate(foundEntity);
 
             BeanUtils.copyProperties(updateRequest, foundEntity, "id", "dataCriacao", "version");
@@ -67,6 +77,8 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
         }
     }
 
+    // Hooks methods
+
     public void beforeSave(T entity) {
 
     }
@@ -83,4 +95,8 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
 
     }
 
+    @Autowired()
+    public void setRelationshipResolver(RelationshipResolver relationshipResolver) {
+        this.relationshipResolver = relationshipResolver;
+    }
 }
