@@ -1,5 +1,6 @@
 package dev.fabricio.kofrinho.model;
 
+import dev.fabricio.kofrinho.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "categoria")
 @Getter
 @Setter
-public class Categoria {
+public class Categoria extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,8 @@ public class Categoria {
 
     @Column(length = 100, nullable = false)
     private String nome;
+
+    private Integer codigo;
 
     @ManyToOne
     @JoinColumn(name = "pai")
