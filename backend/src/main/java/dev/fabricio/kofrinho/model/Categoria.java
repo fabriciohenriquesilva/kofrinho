@@ -20,7 +20,7 @@ public class Categoria extends BaseEntity {
     @Column(length = 100, nullable = false)
     private String nome;
 
-    private Integer codigo;
+    private String codigo;
 
     @ManyToOne
     @JoinColumn(name = "pai")

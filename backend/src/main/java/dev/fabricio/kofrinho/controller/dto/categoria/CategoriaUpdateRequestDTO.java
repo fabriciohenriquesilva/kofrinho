@@ -17,7 +17,7 @@ public class CategoriaUpdateRequestDTO implements Updatable {
     private String nome;
 
     @NotNull
-    private Integer codigo;
+    private String codigo;
 
     private Integer paiId;
 

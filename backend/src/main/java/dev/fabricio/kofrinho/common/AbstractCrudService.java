@@ -26,6 +26,7 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
 
             relationshipResolver.execute(entity, createRequest);
 
+            validate(entity);
             beforeSave(entity);
             entity = (T) getRepository().save(entity);
             afterSave(entity);
@@ -57,6 +58,7 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
 
             relationshipResolver.execute(foundEntity, updateRequest);
 
+            validate(foundEntity);
             beforeUpdate(foundEntity);
 
             BeanUtils.copyProperties(updateRequest, foundEntity, "id", "dataCriacao", "version");
@@ -78,6 +80,10 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
     }
 
     // Hooks methods
+
+    public void validate(T entity) throws ServiceException {
+
+    }
 
     public void beforeSave(T entity) {
 

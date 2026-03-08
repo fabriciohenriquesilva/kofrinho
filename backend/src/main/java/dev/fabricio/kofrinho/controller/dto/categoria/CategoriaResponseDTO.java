@@ -14,7 +14,7 @@ public class CategoriaResponseDTO {
 
     private Integer id;
 
-    private Integer codigo;
+    private String codigo;
 
     private String nome;
 

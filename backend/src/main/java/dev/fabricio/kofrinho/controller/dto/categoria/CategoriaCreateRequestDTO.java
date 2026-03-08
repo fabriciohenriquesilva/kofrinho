@@ -17,7 +17,7 @@ public class CategoriaCreateRequestDTO implements RelationshipAware {
     private String nome;
 
     @NotNull
-    private Integer codigo;
+    private String codigo;
 
     private Integer paiId;
 
