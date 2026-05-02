@@ -1,5 +1,6 @@
 package dev.fabricio.kofrinho.model;
 
+import dev.fabricio.kofrinho.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.List;
 @Table(name = "transacao")
 @Getter
 @Setter
-public class Transacao {
+public class Transacao extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +21,8 @@ public class Transacao {
     @Column(nullable = false)
     private String descricao;
 
-    private String credor;
+    @ManyToOne
+    private Credor credor;
 
     @ManyToOne
     @JoinColumn(name = "categoria")
