@@ -1,6 +1,6 @@
 package dev.fabricio.kofrinho.controller.dto.categoria;
 
-import dev.fabricio.kofrinho.common.Updatable;
+import dev.fabricio.kofrinho.common.Identifiable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CategoriaUpdateRequestDTO implements Updatable {
+public class CategoriaUpdateRequestDTO implements Identifiable {
 
     @NotNull
     private Integer id;

@@ -15,15 +15,11 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
 
     public abstract MapperContract getMapper();
 
-//    private RelationshipResolver relationshipResolver;
-
     public T save(C createRequest) {
         try {
             T entity = (T) getMapper().fromCreateDTO(createRequest);
 
             entity.setDataCriacao(LocalDateTime.now());
-
-//            relationshipResolver.execute(entity, createRequest);
 
             validate(entity);
             beforeSave(entity);
@@ -55,13 +51,10 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
             }
 
             T foundEntity = findById.get();
-
-//            relationshipResolver.execute(foundEntity, updateRequest);
-
-            validate(foundEntity);
-            beforeUpdate(foundEntity);
-
             BeanUtils.copyProperties(updateRequest, foundEntity, "id", "dataCriacao", "version");
+
+            beforeUpdate(foundEntity);
+            validate(foundEntity);
             foundEntity = (T) getRepository().save(foundEntity);
             afterUpdate(foundEntity);
 

@@ -1,20 +1,32 @@
 package dev.fabricio.kofrinho.controller.mapper;
 
-import dev.fabricio.kofrinho.common.BaseMapper;
+import dev.fabricio.kofrinho.common.MapperContract;
 import dev.fabricio.kofrinho.controller.dto.categoria.CategoriaCreateRequestDTO;
 import dev.fabricio.kofrinho.controller.dto.categoria.CategoriaResponseDTO;
+import dev.fabricio.kofrinho.controller.dto.categoria.CategoriaUpdateRequestDTO;
 import dev.fabricio.kofrinho.model.Categoria;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Component
-public class CategoriaMapper extends BaseMapper<Categoria, CategoriaCreateRequestDTO, CategoriaResponseDTO> {
+@Mapper(componentModel = "spring")
+public interface CategoriaMapper extends MapperContract<Categoria, CategoriaCreateRequestDTO, CategoriaUpdateRequestDTO, CategoriaResponseDTO> {
 
-    public CategoriaMapper() {
-        super(Categoria.class, CategoriaResponseDTO.class);
-    }
+    @Mapping(source = "paiId", target = "pai")
+    Categoria fromCreateDTO(CategoriaCreateRequestDTO createRequestDTO);
 
-    @Override
-    public void mapRelationship(Categoria entity, CategoriaResponseDTO response) {
-        response.setPai(this.toDTO(entity.getPai()));
+    @Mapping(source = "paiId", target = "pai")
+    Categoria fromUpdateDTO(CategoriaUpdateRequestDTO updateRequestDTO);
+
+    CategoriaResponseDTO toReponse(Categoria entity);
+
+    default Categoria fromId(Integer id) {
+        if (id == null) {
+            return null;
+        }
+
+        Categoria categoria = new Categoria();
+        categoria.setId(id);
+
+        return categoria;
     }
 }
