@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@JsonPropertyOrder({"id", "nome", "agencia", "codigo", "dataCriacao", "banco", "usuario"})
+@JsonPropertyOrder({"id", "nome", "agencia", "codigo", "dataCriacao", "banco", "usuario, version"})
 public class ContaResponseDTO {
 
     private Integer id;
@@ -26,5 +26,7 @@ public class ContaResponseDTO {
     private BancoResponseDTO banco;
 
     private UsuarioResponseDTO usuario;
+
+    private Integer version;
 
 }

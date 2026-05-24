@@ -1,23 +1,35 @@
 package dev.fabricio.kofrinho.controller.mapper;
 
-import dev.fabricio.kofrinho.common.BaseMapper;
+import dev.fabricio.kofrinho.common.MapperContract;
 import dev.fabricio.kofrinho.controller.dto.conta.ContaCreateRequestDTO;
 import dev.fabricio.kofrinho.controller.dto.conta.ContaResponseDTO;
+import dev.fabricio.kofrinho.controller.dto.conta.ContaUpdateRequestDTO;
 import dev.fabricio.kofrinho.model.Conta;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Component
-public class ContaMapper extends BaseMapper<Conta, ContaCreateRequestDTO, ContaResponseDTO> {
+@Mapper(
+        componentModel = "spring",
+        uses = BancoMapper.class
+)
+public interface ContaMapper extends MapperContract<Conta, ContaCreateRequestDTO, ContaUpdateRequestDTO, ContaResponseDTO> {
 
-    private final BancoMapper bancoMapper;
+    @Mapping(source = "bancoId", target = "banco")
+    Conta fromCreateDTO(ContaCreateRequestDTO createRequestDTO);
 
-    public ContaMapper(BancoMapper bancoMapper) {
-        super(Conta.class, ContaResponseDTO.class);
-        this.bancoMapper = bancoMapper;
-    }
+    @Mapping(source = "bancoId", target = "banco")
+    Conta fromUpdateDTO(ContaUpdateRequestDTO updateRequestDTO);
 
-    @Override
-    public void mapRelationship(Conta entity, ContaResponseDTO response) {
-        response.setBanco(bancoMapper.toDTO(entity.getBanco()));
+    ContaResponseDTO toReponse(Conta entity);
+
+    default Conta fromId(Integer id) {
+        if (id == null) {
+            return null;
+        }
+
+        Conta conta = new Conta();
+        conta.setId(id);
+
+        return conta;
     }
 }
