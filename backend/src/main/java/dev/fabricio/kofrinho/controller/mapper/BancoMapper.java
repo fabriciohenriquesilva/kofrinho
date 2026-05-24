@@ -1,15 +1,18 @@
 package dev.fabricio.kofrinho.controller.mapper;
 
-import dev.fabricio.kofrinho.common.BaseMapper;
+import dev.fabricio.kofrinho.common.MapperContract;
 import dev.fabricio.kofrinho.controller.dto.banco.BancoCreateRequestDTO;
 import dev.fabricio.kofrinho.controller.dto.banco.BancoResponseDTO;
+import dev.fabricio.kofrinho.controller.dto.banco.BancoUpdateRequestDTO;
 import dev.fabricio.kofrinho.model.Banco;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
-public class BancoMapper extends BaseMapper<Banco, BancoCreateRequestDTO, BancoResponseDTO> {
+@Mapper(componentModel = "spring")
+public interface BancoMapper extends MapperContract<Banco, BancoCreateRequestDTO, BancoUpdateRequestDTO, BancoResponseDTO> {
 
-    public BancoMapper() {
-        super(Banco.class, BancoResponseDTO.class);
-    }
+    Banco fromCreateDTO(BancoCreateRequestDTO bancoCreateRequestDTO);
+
+    Banco fromUpdateDTO(BancoUpdateRequestDTO bancoUpdateRequestDTO);
+
+    BancoResponseDTO toReponse(Banco banco);
 }

@@ -24,11 +24,11 @@ public class BancoController extends AbstractController<Banco, Integer, BancoCre
 
     @Override
     protected BancoService getService() {
-        return this.bancoService;
+        return bancoService;
     }
 
     @Override
     protected BancoMapper getMapper() {
-        return this.bancoMapper;
+        return bancoMapper;
     }
 }

@@ -1,6 +1,6 @@
 package dev.fabricio.kofrinho.common;
 
-public interface BaseCrudService<T, ID, C, U extends Updatable> {
+public interface BaseCrudService<T, ID, C, U extends Identifiable> {
 
     T save(C createRequest);
 

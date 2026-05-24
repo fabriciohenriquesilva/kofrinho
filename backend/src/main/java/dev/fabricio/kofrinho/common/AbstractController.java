@@ -12,16 +12,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-public abstract class AbstractController<T extends BaseEntity, ID, C, U extends Updatable, R> {
+public abstract class AbstractController<E extends BaseEntity, ID, C, U extends Identifiable, R> {
 
-    protected abstract BaseCrudService<T, ID, C, U> getService();
+    protected abstract BaseCrudService<E, ID, C, U> getService();
 
-    protected abstract BaseMapper<T, C, R> getMapper();
+    protected abstract MapperContract<E, C, U, R> getMapper();
 
     @PostMapping
     public ResponseEntity<R> create(@Valid @RequestBody C request) {
-        T entity = getService().save(request);
-        R response = getMapper().toDTO(entity);
+        E entity = getService().save(request);
+        R response = getMapper().toReponse(entity);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -33,15 +33,15 @@ public abstract class AbstractController<T extends BaseEntity, ID, C, U extends 
 
     @GetMapping("/{id}")
     public ResponseEntity<R> findById(@PathVariable ID id) {
-        T entity = getService().findById(id);
-        R response = getMapper().toDTO(entity);
+        E entity = getService().findById(id);
+        R response = getMapper().toReponse(entity);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping
     public ResponseEntity<R> update(@Valid @RequestBody U request) {
-        T entity = getService().update(request);
-        R response = getMapper().toDTO(entity);
+        E entity = getService().update(request);
+        R response = getMapper().toReponse(entity);
         return ResponseEntity.ok(response);
     }
 

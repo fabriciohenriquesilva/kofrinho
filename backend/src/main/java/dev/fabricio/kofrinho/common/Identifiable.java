@@ -1,6 +1,6 @@
 package dev.fabricio.kofrinho.common;
 
-public interface Updatable {
+public interface Identifiable {
 
     Integer getId();
 
