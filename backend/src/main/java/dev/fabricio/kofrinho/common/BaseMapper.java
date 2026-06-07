@@ -3,6 +3,9 @@ package dev.fabricio.kofrinho.common;
 import dev.fabricio.kofrinho.exception.ServiceException;
 import org.springframework.beans.BeanUtils;
 
+/**
+ * @deprecated
+ */
 public abstract class BaseMapper<E, C, R> {
 
     private final Class<E> entityClass;

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+/**
+ * @deprecated
+ */
 @Component
 public class RelationshipResolver {
 

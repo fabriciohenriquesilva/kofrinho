@@ -4,6 +4,9 @@ import java.util.Map;
 
 // TODO revisar depois se faz sentido o DTO conhecer a classe de Serviço
 
+/**
+ * @deprecated
+ */
 public interface RelationshipAware {
 
     record RelationshipConfig(String idFieldName, Class<?> serviceClass) {
