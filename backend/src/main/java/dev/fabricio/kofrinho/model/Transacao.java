@@ -34,7 +34,7 @@ public class Transacao extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-    private TipoTransacao tipoTransacao;
+    private TipoTransacaoEnum tipoTransacao;
 
     @Column(name = "qtdeparcelas")
     private Integer quantidadeParcelas;

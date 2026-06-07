@@ -20,7 +20,7 @@ public class Conta extends BaseEntity {
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String agencia;
 
     @Column(length = 10)

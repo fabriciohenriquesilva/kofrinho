@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transacao")
+@Table(name = "parcela")
 @Getter
 @Setter
 public class Parcela extends BaseEntity {
@@ -33,13 +33,9 @@ public class Parcela extends BaseEntity {
     @Column(name = "valorliquido")
     private BigDecimal valorLiquido;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "tipopagamento")
-//    private TipoPagamento tipoPagamento;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "formapagamento")
-    private FormaPagamento formaPagamento;
+    private FormaPagamentoEnum formaPagamento;
 
     @ManyToOne
     @JoinColumn(name = "transacao")

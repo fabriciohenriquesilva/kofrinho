@@ -3,7 +3,7 @@ package dev.fabricio.kofrinho.model;
 import lombok.Getter;
 
 @Getter
-public enum FormaPagamento {
+public enum FormaPagamentoEnum {
 
     PIX("PIX"),
     DINHEIRO("Dinheiro"),
@@ -13,7 +13,7 @@ public enum FormaPagamento {
 
     private final String nome;
 
-    FormaPagamento(String nome) {
+    FormaPagamentoEnum(String nome) {
         this.nome = nome;
     }
 }

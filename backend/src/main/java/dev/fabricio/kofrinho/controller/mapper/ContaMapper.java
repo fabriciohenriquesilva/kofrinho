@@ -8,10 +8,7 @@ import dev.fabricio.kofrinho.model.Conta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(
-        componentModel = "spring",
-        uses = BancoMapper.class
-)
+@Mapper(componentModel = "spring", uses = BancoMapper.class)
 public interface ContaMapper extends MapperContract<Conta, ContaCreateRequestDTO, ContaUpdateRequestDTO, ContaResponseDTO> {
 
     @Mapping(source = "bancoId", target = "banco")

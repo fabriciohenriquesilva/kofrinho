@@ -17,6 +17,4 @@ public class CategoriaCreateRequestDTO {
 
     private Integer paiId;
 
-    private Integer usuarioId;
-
 }

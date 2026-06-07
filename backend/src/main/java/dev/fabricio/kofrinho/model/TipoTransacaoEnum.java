@@ -3,15 +3,15 @@ package dev.fabricio.kofrinho.model;
 import lombok.Getter;
 
 @Getter
-public enum TipoTransacao {
+public enum TipoTransacaoEnum {
 
-    DEPESA("Despesa"),
+    DESPESA("Despesa"),
     RECEITA("Receita"),
     INVESTIMENTO("Investimento");
 
     private final String nome;
 
-    TipoTransacao(String nome) {
+    TipoTransacaoEnum(String nome) {
         this.nome = nome;
     }
 }
