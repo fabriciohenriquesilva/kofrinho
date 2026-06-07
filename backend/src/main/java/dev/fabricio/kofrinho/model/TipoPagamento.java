@@ -2,6 +2,10 @@ package dev.fabricio.kofrinho.model;
 
 import lombok.Getter;
 
+/**
+ * @deprecated
+ */
+
 @Getter
 public enum TipoPagamento {
 
