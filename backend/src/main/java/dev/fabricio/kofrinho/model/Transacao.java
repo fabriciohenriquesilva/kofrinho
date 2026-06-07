@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,6 +22,9 @@ public class Transacao extends BaseEntity {
     @Column(nullable = false)
     private String descricao;
 
+    @Column(name = "data", nullable = false)
+    private LocalDate data;
+
     @ManyToOne
     private Credor credor;
 
@@ -31,6 +35,9 @@ public class Transacao extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
     private TipoTransacao tipoTransacao;
+
+    @Column(name = "qtdeparcelas")
+    private Integer quantidadeParcelas;
 
     @ManyToOne
     @JoinColumn(name = "usuario")

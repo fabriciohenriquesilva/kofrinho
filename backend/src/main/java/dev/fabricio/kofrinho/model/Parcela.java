@@ -33,9 +33,9 @@ public class Parcela extends BaseEntity {
     @Column(name = "valorliquido")
     private BigDecimal valorLiquido;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipopagamento")
-    private TipoPagamento tipoPagamento;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "tipopagamento")
+//    private TipoPagamento tipoPagamento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "formapagamento")
