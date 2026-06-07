@@ -5,6 +5,7 @@ import dev.fabricio.kofrinho.exception.ServiceException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -86,6 +87,15 @@ public class RestExceptionHandler {
         var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle("A requisição não pode ser processada");
         problemDetail.setDetail("Método HTTP inválido para a rota fornecida. Verifique a documentação");
+        return problemDetail;
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ProblemDetail handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        problemDetail.setTitle("A requisição não pode ser processada");
+        problemDetail.setDetail("Erro ao serializar a requisição. " + ex.getMessage());
         return problemDetail;
     }
 
