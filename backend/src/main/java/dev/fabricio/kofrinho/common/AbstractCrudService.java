@@ -93,9 +93,4 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
     public void afterUpdate(T entity) {
 
     }
-
-//    @Autowired()
-//    public void setRelationshipResolver(RelationshipResolver relationshipResolver) {
-//        this.relationshipResolver = relationshipResolver;
-//    }
 }
