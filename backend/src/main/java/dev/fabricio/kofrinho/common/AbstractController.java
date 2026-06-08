@@ -21,7 +21,7 @@ public abstract class AbstractController<E extends BaseEntity, ID, C, U extends 
     @PostMapping
     public ResponseEntity<R> create(@Valid @RequestBody C request) {
         E entity = getService().save(request);
-        R response = getMapper().toReponse(entity);
+        R response = getMapper().toResponse(entity);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -34,14 +34,14 @@ public abstract class AbstractController<E extends BaseEntity, ID, C, U extends 
     @GetMapping("/{id}")
     public ResponseEntity<R> findById(@PathVariable ID id) {
         E entity = getService().findById(id);
-        R response = getMapper().toReponse(entity);
+        R response = getMapper().toResponse(entity);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping
     public ResponseEntity<R> update(@Valid @RequestBody U request) {
         E entity = getService().update(request);
-        R response = getMapper().toReponse(entity);
+        R response = getMapper().toResponse(entity);
         return ResponseEntity.ok(response);
     }
 

@@ -17,16 +17,7 @@ public interface ParcelaMapper extends MapperContract<Parcela, ParcelaCreateRequ
     @Mapping(source = "contaId", target = "conta")
     Parcela fromUpdateDTO(ParcelaUpdateRequestDTO updateRequestDTO);
 
-    ParcelaResponseDTO toReponse(Parcela entity);
+    ParcelaResponseDTO toResponse(Parcela entity);
 
-    default Parcela fromId(Integer id) {
-        if (id == null) {
-            return null;
-        }
-
-        Parcela parcela = new Parcela();
-        parcela.setId(id);
-
-        return parcela;
-    }
+    Parcela fromId(Integer id);
 }

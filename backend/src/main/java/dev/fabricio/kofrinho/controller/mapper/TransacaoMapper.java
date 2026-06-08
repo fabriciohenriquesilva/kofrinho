@@ -19,17 +19,8 @@ public interface TransacaoMapper extends MapperContract<Transacao, TransacaoCrea
     @Mapping(source = "categoriaId", target = "categoria")
     Transacao fromUpdateDTO(TransacaoUpdateRequestDTO updateRequestDTO);
 
-    TransacaoResponseDTO toReponse(Transacao entity);
+    TransacaoResponseDTO toResponse(Transacao entity);
 
-    default Transacao fromId(Integer id) {
-        if (id == null) {
-            return null;
-        }
-
-        Transacao transacao = new Transacao();
-        transacao.setId(id);
-
-        return transacao;
-    }
+    Transacao fromId(Integer id);
 
 }

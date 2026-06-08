@@ -14,17 +14,8 @@ public interface CredorMapper extends MapperContract<Credor, CredorCreateRequest
 
     Credor fromUpdateDTO(CredorUpdateRequestDTO updateRequestDTO);
 
-    CredorResponseDTO toReponse(Credor entity);
+    CredorResponseDTO toResponse(Credor entity);
 
-    default Credor fromId(Integer id) {
-        if (id == null) {
-            return null;
-        }
-
-        Credor credor = new Credor();
-        credor.setId(id);
-
-        return credor;
-    }
+    Credor fromId(Integer id);
 
 }

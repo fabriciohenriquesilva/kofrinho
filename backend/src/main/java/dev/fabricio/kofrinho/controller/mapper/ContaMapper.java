@@ -17,16 +17,7 @@ public interface ContaMapper extends MapperContract<Conta, ContaCreateRequestDTO
     @Mapping(source = "bancoId", target = "banco")
     Conta fromUpdateDTO(ContaUpdateRequestDTO updateRequestDTO);
 
-    ContaResponseDTO toReponse(Conta entity);
+    ContaResponseDTO toResponse(Conta entity);
 
-    default Conta fromId(Integer id) {
-        if (id == null) {
-            return null;
-        }
-
-        Conta conta = new Conta();
-        conta.setId(id);
-
-        return conta;
-    }
+    Conta fromId(Integer id);
 }

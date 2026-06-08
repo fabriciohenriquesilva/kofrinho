@@ -17,16 +17,7 @@ public interface CategoriaMapper extends MapperContract<Categoria, CategoriaCrea
     @Mapping(source = "paiId", target = "pai")
     Categoria fromUpdateDTO(CategoriaUpdateRequestDTO updateRequestDTO);
 
-    CategoriaResponseDTO toReponse(Categoria entity);
+    CategoriaResponseDTO toResponse(Categoria entity);
 
-    default Categoria fromId(Integer id) {
-        if (id == null) {
-            return null;
-        }
-
-        Categoria categoria = new Categoria();
-        categoria.setId(id);
-
-        return categoria;
-    }
+    Categoria fromId(Integer id);
 }

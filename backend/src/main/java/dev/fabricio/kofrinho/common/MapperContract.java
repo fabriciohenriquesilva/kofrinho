@@ -6,6 +6,8 @@ public interface MapperContract<E, C, U, R> {
 
     E fromUpdateDTO(U updateRequestDTO);
 
-    R toReponse(E entity);
+    R toResponse(E entity);
+
+    E fromId(Integer id);
 
 }

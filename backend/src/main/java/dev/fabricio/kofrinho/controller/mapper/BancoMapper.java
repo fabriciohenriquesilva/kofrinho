@@ -14,16 +14,7 @@ public interface BancoMapper extends MapperContract<Banco, BancoCreateRequestDTO
 
     Banco fromUpdateDTO(BancoUpdateRequestDTO bancoUpdateRequestDTO);
 
-    BancoResponseDTO toReponse(Banco banco);
+    BancoResponseDTO toResponse(Banco banco);
 
-    default Banco fromId(Integer id) {
-        if (id == null) {
-            return null;
-        }
-
-        Banco banco = new Banco();
-        banco.setId(id);
-
-        return banco;
-    }
+    Banco fromId(Integer id);
 }
