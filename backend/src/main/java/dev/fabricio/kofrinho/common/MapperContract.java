@@ -1,6 +1,6 @@
 package dev.fabricio.kofrinho.common;
 
-public interface MapperContract<E, C, U, R> {
+public interface MapperContract<E extends BaseEntity, C, U, R> {
 
     E fromCreateDTO(C createRequestDTO);
 
