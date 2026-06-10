@@ -1,6 +1,7 @@
 package dev.fabricio.kofrinho.handler;
 
 import dev.fabricio.kofrinho.exception.RegistroNaoEncontradoException;
+import dev.fabricio.kofrinho.exception.RegraDeNegocioException;
 import dev.fabricio.kofrinho.exception.ServiceException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -96,6 +97,15 @@ public class RestExceptionHandler {
         var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle("A requisição não pode ser processada");
         problemDetail.setDetail("Erro ao serializar a requisição. " + ex.getMessage());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(RegraDeNegocioException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_CONTENT)
+    public ProblemDetail handleRegraDeNegocioException(RegraDeNegocioException ex) {
+        var problemDetail = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_CONTENT);
+        problemDetail.setTitle("A requisição não pode ser processada");
+        problemDetail.setDetail("Uma regra de negócio foi violada. Favor conferir os dados da requisição. " + ex.getMessage());
         return problemDetail;
     }
 
