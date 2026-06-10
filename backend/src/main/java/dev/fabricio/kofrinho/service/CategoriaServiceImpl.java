@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -40,8 +41,16 @@ public class CategoriaServiceImpl extends AbstractCrudService<Categoria, Integer
     public void validate(Categoria entity) throws ServiceException {
         List<Categoria> optional = getRepository().findCategoriaByCodigo(entity.getCodigo());
 
-        if (!optional.isEmpty()) {
+        optional.stream().filter(categoria -> !Objects.equals(categoria.getId(), entity.getId())).findFirst().ifPresent(categoria -> {
             throw new ServiceException(MessageFormat.format("Já existe uma categoria com o código {0}. Por favor, informe outro código", entity.getCodigo()));
+        });
+    }
+
+    @Override
+    public void updateRelationships(CategoriaUpdateRequestDTO updateRequest, Categoria categoria) {
+        if (updateRequest.getPaiId() != null) {
+            Categoria categoriaPai = findById(updateRequest.getPaiId());
+            categoria.setPai(categoriaPai);
         }
     }
 }
