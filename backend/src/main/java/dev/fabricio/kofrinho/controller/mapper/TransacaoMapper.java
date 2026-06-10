@@ -7,6 +7,7 @@ import dev.fabricio.kofrinho.controller.dto.transacao.TransacaoUpdateRequestDTO;
 import dev.fabricio.kofrinho.model.Transacao;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring", uses = {CategoriaMapper.class, CredorMapper.class, ParcelaMapper.class})
 public interface TransacaoMapper extends MapperContract<Transacao, TransacaoCreateRequestDTO, TransacaoUpdateRequestDTO, TransacaoResponseDTO> {
@@ -15,9 +16,10 @@ public interface TransacaoMapper extends MapperContract<Transacao, TransacaoCrea
     @Mapping(source = "categoriaId", target = "categoria")
     Transacao fromCreateDTO(TransacaoCreateRequestDTO createRequestDTO);
 
-    @Mapping(source = "credorId", target = "credor")
-    @Mapping(source = "categoriaId", target = "categoria")
-    Transacao fromUpdateDTO(TransacaoUpdateRequestDTO updateRequestDTO);
+    @Mapping(target = "credor", ignore = true)
+    @Mapping(target = "categoria", ignore = true)
+    @Mapping(target = "parcelaList", ignore = true)
+    void updateEntity(TransacaoUpdateRequestDTO updateRequestDTO, @MappingTarget Transacao entity);
 
     TransacaoResponseDTO toResponse(Transacao entity);
 

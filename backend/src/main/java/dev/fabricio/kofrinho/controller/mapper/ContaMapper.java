@@ -7,6 +7,7 @@ import dev.fabricio.kofrinho.controller.dto.conta.ContaUpdateRequestDTO;
 import dev.fabricio.kofrinho.model.Conta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring", uses = BancoMapper.class)
 public interface ContaMapper extends MapperContract<Conta, ContaCreateRequestDTO, ContaUpdateRequestDTO, ContaResponseDTO> {
@@ -14,8 +15,8 @@ public interface ContaMapper extends MapperContract<Conta, ContaCreateRequestDTO
     @Mapping(source = "bancoId", target = "banco")
     Conta fromCreateDTO(ContaCreateRequestDTO createRequestDTO);
 
-    @Mapping(source = "bancoId", target = "banco")
-    Conta fromUpdateDTO(ContaUpdateRequestDTO updateRequestDTO);
+    @Mapping(target = "banco", ignore = true)
+    void updateEntity(ContaUpdateRequestDTO updateRequestDTO, @MappingTarget Conta entity);
 
     ContaResponseDTO toResponse(Conta entity);
 

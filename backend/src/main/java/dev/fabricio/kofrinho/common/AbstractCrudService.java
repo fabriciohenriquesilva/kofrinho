@@ -2,13 +2,14 @@ package dev.fabricio.kofrinho.common;
 
 import dev.fabricio.kofrinho.exception.RegistroNaoEncontradoException;
 import dev.fabricio.kofrinho.exception.ServiceException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 @SuppressWarnings("unchecked")
+@Transactional
 public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends Identifiable> implements BaseCrudService<T, ID, C, U> {
 
     public abstract JpaRepository getRepository();
@@ -44,14 +45,15 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
 
     public T update(U updateRequest) {
         try {
-            Optional<T> findById = getRepository().findById(updateRequest.getId());
+            Optional<T> optional = getRepository().findById(updateRequest.getId());
 
-            if (findById.isEmpty()) {
+            if (optional.isEmpty()) {
                 throw new RegistroNaoEncontradoException(updateRequest.getId());
             }
 
-            T foundEntity = findById.get();
-            BeanUtils.copyProperties(updateRequest, foundEntity, "id", "dataCriacao", "version");
+            T foundEntity = optional.get();
+            getMapper().updateEntity(updateRequest, foundEntity);
+            updateRelationships(updateRequest, foundEntity);
 
             beforeUpdate(foundEntity);
             validate(foundEntity);
@@ -91,6 +93,10 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
     }
 
     public void afterUpdate(T entity) {
+
+    }
+
+    public void updateRelationships(U updateRequest, T entity) {
 
     }
 }

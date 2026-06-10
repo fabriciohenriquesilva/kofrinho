@@ -6,13 +6,14 @@ import dev.fabricio.kofrinho.controller.dto.banco.BancoResponseDTO;
 import dev.fabricio.kofrinho.controller.dto.banco.BancoUpdateRequestDTO;
 import dev.fabricio.kofrinho.model.Banco;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface BancoMapper extends MapperContract<Banco, BancoCreateRequestDTO, BancoUpdateRequestDTO, BancoResponseDTO> {
 
     Banco fromCreateDTO(BancoCreateRequestDTO bancoCreateRequestDTO);
 
-    Banco fromUpdateDTO(BancoUpdateRequestDTO bancoUpdateRequestDTO);
+    void updateEntity(BancoUpdateRequestDTO updateRequestDTO, @MappingTarget Banco entity);
 
     BancoResponseDTO toResponse(Banco banco);
 
