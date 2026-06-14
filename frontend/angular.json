@@ -11,7 +11,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "skipTests": true,
+          "skipTests": true
         },
         "@schematics/angular:class": {
           "skipTests": true
@@ -74,10 +74,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "frontend:build:production"
+              "buildTarget": "kofrinho:build:production"
             },
             "development": {
-              "buildTarget": "frontend:build:development"
+              "buildTarget": "kofrinho:build:development"
             }
           },
           "defaultConfiguration": "development"
