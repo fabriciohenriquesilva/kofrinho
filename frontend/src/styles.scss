@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+@use './styles/theme';
+@use './styles/variables' as *;
+
+/* RESET */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #ffffff;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100%;
+
+    font-family: $font-family-base;
+
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+/* UTILITIES */
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.gap-1 {
+    gap: $spacing-1;
+}
+
+.gap-2 {
+    gap: $spacing-2;
+}
+
+.gap-3 {
+    gap: $spacing-3;
+}
+
+.gap-4 {
+    gap: $spacing-4;
+}
+
+.gap-6 {
+    gap: $spacing-6;
+}
