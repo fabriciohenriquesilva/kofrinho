@@ -1,0 +1,41 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+
+    <div class="sidebar__header">
+        <div class="sidebar__brand">
+            @if (!isCollapsed) {
+                <div class="sidebar__logo">
+                    💰
+                </div>
+
+                <div class="sidebar__title">
+                    <h1>Kofrinho</h1>
+                    <span>Finanças Pessoais</span>
+                </div>
+            }
+
+        </div>
+
+        <button
+            class="sidebar__toggle"
+            (click)="toggleMenu()">
+
+            <i class="ph ph-list"></i>
+        </button>
+
+    </div>
+
+    <nav class="sidebar__menu">
+
+        @for (item of menuItems; track item.id) {
+            <a class="menu-item active">
+                <i class="{{ item.icon }}"></i>
+
+                @if (!isCollapsed) {
+                    <span>{{ item.label }}</span>
+                }
+            </a>
+        }
+
+    </nav>
+
+</aside>

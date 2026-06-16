@@ -1,0 +1,14 @@
+@import "../styles/colors";
+
+.main-app {
+    display: flex;
+    overflow: hidden;
+    background-color: $gray-200;
+    height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
