@@ -1,0 +1,37 @@
+<div class="input-group">
+
+    <div class="input-label">
+
+        <label>{{ label }}
+            @if (required) {
+                <span class="required">*</span>
+            }
+        </label>
+    </div>
+
+    <div>
+        <input
+            #textInputElement
+            [id]="name"
+            [name]="name"
+            class="input-field"
+            type="text"
+            [disabled]="!!isDisabled"
+            [placeholder]="placeholder"
+            [(ngModel)]="value"
+            [style.width.px]="width ? width : null"
+        />
+    </div>
+
+    @if (hint && !error) {
+        <small class="input-hint">
+            {{ hint }}
+        </small>
+    }
+
+    @if (error) {
+        <small class="input-error">
+            {{ error }}
+        </small>
+    }
+</div>
