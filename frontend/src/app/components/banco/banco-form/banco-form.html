@@ -1,0 +1,24 @@
+<h2 class="title-page">Cadastro de Banco</h2>
+
+<form>
+    <app-number-input label="Id"
+                      name="id"
+                      [(value)]="model.id"
+                      [isDisabled]="false">
+    </app-number-input>
+
+    <app-text-input label="Código"
+                    name="codigo"
+                    [(value)]="model.codigo"
+                    placeholder="Digite o código do banco"
+                    [required]="true"
+    ></app-text-input>
+
+    <app-text-input label="Nome"
+                    name="nome"
+                    [(value)]="model.nome"
+                    placeholder="Digite o nome do banco"
+                    [required]="true"
+    ></app-text-input>
+
+</form>
