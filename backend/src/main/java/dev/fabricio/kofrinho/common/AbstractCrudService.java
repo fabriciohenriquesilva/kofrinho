@@ -2,6 +2,8 @@ package dev.fabricio.kofrinho.common;
 
 import dev.fabricio.kofrinho.exception.RegistroNaoEncontradoException;
 import dev.fabricio.kofrinho.exception.ServiceException;
+import jakarta.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,9 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
     public abstract JpaRepository getRepository();
 
     public abstract MapperContract getMapper();
+
+    @Autowired
+    private EntityManager entityManager;
 
     public T save(C createRequest) {
         try {
@@ -98,5 +103,11 @@ public abstract class AbstractCrudService<T extends BaseEntity, ID, C, U extends
 
     public void updateRelationships(U updateRequest, T entity) {
 
+    }
+
+    // Getters and Setters
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }
