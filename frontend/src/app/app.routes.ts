@@ -4,15 +4,15 @@ import {BancoForm} from './components/banco/banco-form/banco-form';
 
 export const routes: Routes = [
     {
-        path: 'bancos',
+        path: 'cadastros/bancos',
         component: BancoList
     },
     {
-        path: 'bancos/edit/:id',
+        path: 'cadastros/bancos/edit/:id',
         component: BancoForm
     },
     {
-        path: 'bancos/create',
+        path: 'cadastros/bancos/create',
         component: BancoForm
     },
 ];

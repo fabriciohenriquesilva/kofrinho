@@ -27,13 +27,33 @@
     <nav class="sidebar__menu">
 
         @for (item of menuItems; track item.id) {
-            <a class="menu-item active">
-                <i class="{{ item.icon }}"></i>
+            <div class="menu-item-container">
 
-                @if (!isCollapsed) {
-                    <span>{{ item.label }}</span>
+                <a class="menu-item">
+                    <i class="{{ item.icon }}"></i>
+
+                    @if (!isCollapsed) {
+                        <span>{{ item.label }}</span>
+                    }
+                </a>
+
+                @if (item?.children?.length) {
+
+                    <div class="submenu">
+
+                        <div class="submenu-title">
+                            {{ item.label }}
+                        </div>
+
+                        @for (child of item.children; track child.id) {
+                            <a class="submenu-item" [routerLink]="[item.path, child.path]">
+                                {{ child.label }}
+                            </a>
+                        }
+
+                    </div>
                 }
-            </a>
+            </div>
         }
 
     </nav>

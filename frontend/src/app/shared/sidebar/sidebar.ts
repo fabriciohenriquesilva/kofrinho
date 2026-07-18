@@ -18,7 +18,24 @@ export class Sidebar {
 
     menuItems: MenuItem[] = [
         {id: 1, label: 'Dashboard', path: 'home', icon: 'ph ph-house', active: true},
-        {id: 2, label: 'Cadastros', path: 'cadastros', icon: 'ph ph-folder'},
+        {
+            id: 2,
+            label: 'Cadastros',
+            path: 'cadastros',
+            icon: 'ph ph-folder',
+            children: [
+                {
+                    id: 201,
+                    label: 'Bancos',
+                    path: 'bancos'
+                },
+                {
+                    id: 12,
+                    label: 'Contas',
+                    path: 'contas'
+                }
+            ]
+        },
         {id: 3, label: 'Lançamentos', path: 'lancamentos', icon: 'ph ph-money'},
         {id: 4, label: 'Veículos', path: 'veiculos', icon: 'ph ph-car'},
         {id: 5, label: 'Relatórios', path: 'reports', icon: 'ph ph-presentation-chart'},
@@ -29,7 +46,8 @@ export class Sidebar {
 interface MenuItem {
     id: number;
     label: string;
-    icon: string;
+    icon?: string;
     active?: boolean;
     path: string;
+    children?: MenuItem[];
 }
